@@ -23,9 +23,9 @@ sd(raw_data$dead_body_count)
 summary(raw_data$dead_body_count)
 
 #Quantitative variable 3
-mean(raw_data$detectives_at_scence)
-sd(raw_data$detectives_at_scence)
-summary(raw_data$detectives_at_scence)
+mean(raw_data$number_characters)
+sd(raw_data$number_characters)
+summary(raw_data$number_characters)
 
 #Qualitative Variable 1
 table(raw_data$lighting)
@@ -40,6 +40,7 @@ table(raw_data$gruesomeness)
 summary(raw_data$gruesomeness)
 
 #Table 2: Contingency Table
+
 table(raw_data$tension,raw_data$lighting)
 chisq.test(raw_data$tension,raw_data$lighting)
 #chi-squared test returns a warning message because there are cells in the table that are less than 5 
@@ -52,7 +53,7 @@ summary(aov_result)
 boxplot(dexter_inner_thoughts ~ gruesomeness, data = raw_data, xlab = "Gruesome?", ylab = "Dexter's Inner Thoughts", main = "Boxplot of Dexter's Inner Thoughts and Gruesomeness", col = "red") 
 
 #Figure 2: Scatter Plot
-plot(dead_body_count ~ number_characters, data = raw_data, xlab = "Number of Characters", ylab = "Dead Body Count", main = "Scatterplot of Number of Characters and Dead Bodies")
+plot(dead_body_count ~ number_characters, data = raw_data, xlab = "Number of Characters", ylab = "Dead Body Count", main = "Figure 1: Scatter Plot showing the Relationship between\nNumber of Characters and Dead Bodies")
 
 # Add x line and y line for means
 meany <- mean(raw_data$dead_body_count)
@@ -73,7 +74,7 @@ dataset_withoutoutlier <- raw_data %>%
   filter(raw_data$number_characters < 15)
 
 #New plot without outliers
-plot(dead_body_count ~ number_characters, data = dataset_withoutoutlier, xlab = "Number of Characters", ylab = "Dead Body Count", main = "Scatterplot of Number of Characters and Dead Bodies Without Outliers")
+plot(dead_body_count ~ number_characters, data = dataset_withoutoutlier, xlab = "Number of Characters", ylab = "Dead Body Count", main = "Figure 1: Scatter Plot showing the Relationship between\nNumber of Characters and Dead Bodies Without Outliers")
 
 #Add linear regression line to new plot
 linear_regression <- lm(dead_body_count ~ number_characters, data = dataset_withoutoutlier)
@@ -84,13 +85,13 @@ abline(linear_regression, col = "red")
 
 #Figure 3: Residual Plot
 # Plot the residuals
-plot(raw_data$number_characters, residuals(linear_relationship), main = "Residuals vs. Number of Characters", xlab = "Number of Characters", ylab = "Residuals")
+plot(raw_data$number_characters, residuals(linear_relationship), main = "Figure 2: Scatter Plot of Number of Characters and Residuals\nfrom Regression Analysis", xlab = "Number of Characters", ylab = "Residuals")
 
 # Add a horizontal line at zero to indicate the baseline
 abline(h = 0, col = "red")
 
 #plot the residuals for data without outliers
-plot(dataset_withoutoutlier$number_characters, residuals(linear_regression), main = "Residuals vs. Number of Characters Without Outliers", xlab = "Number of Characters", ylab = "Residuals")
+plot(dataset_withoutoutlier$number_characters, residuals(linear_regression), main = "Figure 2: Scatter Plot of Number of Characters and Residuals\nfrom Regression Analysis Without Outliers", xlab = "Number of Characters", ylab = "Residuals")
 
-#Add a horizontal line at zero to indicate the baseline for new plot
+#Add a horizontal line at zero to indicate the baseline for plot without residuals
 abline(h = 0, col = "red")
